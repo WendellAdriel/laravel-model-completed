@@ -1,0 +1,43 @@
+{
+    "name": "wendelladriel/laravel-model-completed",
+    "description": "Laravel helper to know the completion status of an Eloquent Model",
+    "type": "library",
+    "keywords": ["laravel", "eloquent", "model", "completion", "complete", "completed"],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "WendellAdriel\\ModelCompleted\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WendellAdriel\\ModelCompleted\\Tests\\": "tests/"
+        }
+    },
+    "support": {
+        "issues": "https://github.com/WendellAdriel/laravel-model-completed/issues",
+        "source": "https://github.com/WendellAdriel/laravel-model-completed"
+    },
+    "authors": [
+        {
+            "name": "Wendell Adriel",
+            "email": "wendelladriel.ti@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0"
+    },
+    "require-dev": {
+        "illuminate/database": "^7.0|^8.0|^9.0",
+        "illuminate/support": "^7.0|^8.0|^9.0",
+        "laravel/pint": "^1.0",
+        "orchestra/testbench": "^7.15"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "WendellAdriel\\ModelCompleted\\Providers\\ModelCompletedServiceProvider"
+            ]
+        }
+    }
+}
