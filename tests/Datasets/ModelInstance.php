@@ -1,6 +1,6 @@
 <?php
 
-namespace WendellAdriel\ModelCompleted\Tests\Dataset;
+namespace WendellAdriel\ModelCompleted\Tests\Datasets;
 
 use Illuminate\Database\Eloquent\Model;
 use WendellAdriel\ModelCompleted\HasCompletionStatus;

@@ -1,76 +1,90 @@
 <?php
 
-namespace WendellAdriel\ModelCompleted\Tests\Unit;
+use WendellAdriel\ModelCompleted\Tests\Datasets\ModelInstance;
 
-use WendellAdriel\ModelCompleted\Tests\Dataset\ModelInstance;
-use WendellAdriel\ModelCompleted\Tests\TestCase;
+it('adds completion status fields', function (...$requiredFields) {
+    $model = new ModelInstance();
+    $model->withCompletionStatus();
 
-class ModelCompletionTest extends TestCase
-{
-    private array $modelRequiredFields = ['name', 'email', 'password'];
+    expect($model->is_complete)
+        ->toBeFalse()
+        ->and($model->required_fields)
+        ->toBeArray()
+        ->toEqual($requiredFields);
 
-    public function testCompletionStatus()
-    {
-        $model = new ModelInstance();
-        $model->withCompletionStatus();
-        $this->assertFalse($model->is_complete);
-        $this->assertIsArray($model->required_fields);
-        $this->assertEquals($this->modelRequiredFields, $model->required_fields);
+    $model->fill([
+        'name' => 'John Doe',
+        'email' => 'john.doe@example.com',
+        'password' => 's3cR3T',
+    ]);
 
-        $model->fill([
+    expect($model->is_complete)->toBeTrue();
+})->with('required_fields');
+
+it('adds completion counts fields', function (...$requiredFields) {
+    $model = new ModelInstance();
+    $model->withCompletionCounts();
+
+    expect($model->total_fields)
+        ->toBe(3)
+        ->and($model->filled_fields)
+        ->toBe(0)
+        ->and($model->empty_fields)
+        ->toBe(3)
+        ->and($model->completion_percentage)
+        ->toBe(0)
+        ->and($model->required_fields)
+        ->toBeArray()
+        ->toEqual($requiredFields);
+
+    $model->fill([
             'name' => 'John Doe',
             'email' => 'john.doe@example.com',
             'password' => 's3cR3T',
         ]);
 
-        $this->assertTrue($model->is_complete);
-    }
+    expect($model->total_fields)
+        ->toBe(3)
+        ->and($model->filled_fields)
+        ->toBe(3)
+        ->and($model->empty_fields)
+        ->toBe(0)
+        ->and($model->completion_percentage)
+        ->toBe(100);
+})->with('required_fields');
 
-    public function testCompletionCounts()
-    {
-        $model = new ModelInstance();
-        $model->withCompletionCounts();
-        $this->assertTrue($model->total_fields === 3);
-        $this->assertTrue($model->filled_fields === 0);
-        $this->assertTrue($model->empty_fields === 3);
-        $this->assertTrue($model->completion_percentage === 0);
-        $this->assertIsArray($model->required_fields);
-        $this->assertEquals($this->modelRequiredFields, $model->required_fields);
+it('adds completion info fields', function (...$requiredFields) {
+    $model = new ModelInstance();
+    $model->withCompletionCounts();
 
-        $model->fill([
+    expect($model->total_fields)
+        ->toBe(3)
+        ->and($model->filled_fields)
+        ->toBe(0)
+        ->and($model->empty_fields)
+        ->toBe(3)
+        ->and($model->completion_percentage)
+        ->toBe(0)
+        ->and($model->is_complete)
+        ->toBeFalse()
+        ->and($model->required_fields)
+        ->toBeArray()
+        ->toEqual($requiredFields);
+
+    $model->fill([
             'name' => 'John Doe',
             'email' => 'john.doe@example.com',
             'password' => 's3cR3T',
         ]);
 
-        $this->assertTrue($model->total_fields === 3);
-        $this->assertTrue($model->filled_fields === 3);
-        $this->assertTrue($model->empty_fields === 0);
-        $this->assertTrue($model->completion_percentage === 100);
-    }
-
-    public function testCompletionInfo()
-    {
-        $model = new ModelInstance();
-        $model->withCompletionInfo();
-        $this->assertTrue($model->total_fields === 3);
-        $this->assertTrue($model->filled_fields === 0);
-        $this->assertTrue($model->empty_fields === 3);
-        $this->assertTrue($model->completion_percentage === 0);
-        $this->assertFalse($model->is_complete);
-        $this->assertIsArray($model->required_fields);
-        $this->assertEquals($this->modelRequiredFields, $model->required_fields);
-
-        $model->fill([
-            'name' => 'John Doe',
-            'email' => 'john.doe@example.com',
-            'password' => 's3cR3T',
-        ]);
-
-        $this->assertTrue($model->total_fields === 3);
-        $this->assertTrue($model->filled_fields === 3);
-        $this->assertTrue($model->empty_fields === 0);
-        $this->assertTrue($model->completion_percentage === 100);
-        $this->assertTrue($model->is_complete);
-    }
-}
+    expect($model->total_fields)
+        ->toBe(3)
+        ->and($model->filled_fields)
+        ->toBe(3)
+        ->and($model->empty_fields)
+        ->toBe(0)
+        ->and($model->completion_percentage)
+        ->toBe(100)
+        ->and($model->is_complete)
+        ->toBeTrue();
+})->with('required_fields');

@@ -31,13 +31,19 @@
         "illuminate/database": "^7.0|^8.0|^9.0",
         "illuminate/support": "^7.0|^8.0|^9.0",
         "laravel/pint": "^1.0",
-        "orchestra/testbench": "^7.15"
+        "orchestra/testbench": "^7.15",
+        "pestphp/pest": "^1.22"
     },
     "extra": {
         "laravel": {
             "providers": [
                 "WendellAdriel\\ModelCompleted\\Providers\\ModelCompletedServiceProvider"
             ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
         }
     }
 }
