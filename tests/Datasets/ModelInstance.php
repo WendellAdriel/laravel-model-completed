@@ -19,6 +19,6 @@ class ModelInstance extends Model
     protected array $required = [
         'name',
         'email',
-        'password'
+        'password',
     ];
 }

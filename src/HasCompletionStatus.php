@@ -38,7 +38,7 @@ trait HasCompletionStatus
     public function filledFields(): Attribute
     {
         return Attribute::make(
-            get: fn () => collect($this->required_fields)->filter(fn ($property) => !empty($this->{$property}))->count(),
+            get: fn () => collect($this->required_fields)->filter(fn ($property) => ! empty($this->{$property}))->count(),
         );
     }
 

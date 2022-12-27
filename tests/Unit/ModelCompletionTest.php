@@ -38,10 +38,10 @@ it('adds completion counts fields', function (...$requiredFields) {
         ->toEqual($requiredFields);
 
     $model->fill([
-            'name' => 'John Doe',
-            'email' => 'john.doe@example.com',
-            'password' => 's3cR3T',
-        ]);
+        'name' => 'John Doe',
+        'email' => 'john.doe@example.com',
+        'password' => 's3cR3T',
+    ]);
 
     expect($model->total_fields)
         ->toBe(3)
@@ -72,10 +72,10 @@ it('adds completion info fields', function (...$requiredFields) {
         ->toEqual($requiredFields);
 
     $model->fill([
-            'name' => 'John Doe',
-            'email' => 'john.doe@example.com',
-            'password' => 's3cR3T',
-        ]);
+        'name' => 'John Doe',
+        'email' => 'john.doe@example.com',
+        'password' => 's3cR3T',
+    ]);
 
     expect($model->total_fields)
         ->toBe(3)
